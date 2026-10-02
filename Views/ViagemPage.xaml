@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjetoViagem.Views.ViagemPage"
+             xmlns:viewmodels="clr-namespace:ProjetoViagem.ViewsModels"
+             xmlns:models="clr-namespace:ProjetoViagem.Models"
+             x:DataType="viewmodels:ViagemViewModel"
+              Shell.NavBarIsVisible="False"
+             BackgroundColor="#D0D0D0"
+             Title="ViagemPage">
+    <Grid RowDefinitions="*, Auto, Auto" Padding="5, 10">
+        <CarouselView IndicatorView="Indicador" Grid.Row="0" Loop="False" ItemsSource="{Binding Viagem}" Position="{Binding Posicao}">
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:ViagemModel">
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="20">
+                        <Image Source="{Binding ImagemUrl}" Aspect="AspectFit" HeightRequest="300"/>
+                        <Label Text="{Binding Titulo}" FontSize="32" HorizontalTextAlignment="Center" TextColor="#333" FontAttributes="Bold"/>
+                        <Label Text="{Binding Descricao}" FontSize="16" TextColor="#333" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <IndicatorView x:Name="Indicador" Grid.Row="1" IndicatorSize="14" HorizontalOptions="Center" IndicatorColor="#fff" SelectedIndicatorColor="#FF1568" Margin="30"/>
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="15">
+            <Button Grid.Column="0" Text="Get started" BackgroundColor="#FF1568" WidthRequest="159"/>
+            <Button Grid.Column="1" Command="{Binding ProximoCommand}" WidthRequest="100"  IsVisible="{Binding ExibirBotao}" Text="Next" BackgroundColor="#4EA717"/>
+        </Grid>
+
+    </Grid>
+</ContentPage>
